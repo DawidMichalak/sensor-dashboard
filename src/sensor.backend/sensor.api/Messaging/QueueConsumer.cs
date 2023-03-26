@@ -10,18 +10,18 @@ namespace sensor.api.Messaging
         private IConnection _connection;
         private IModel _channel;
         private readonly ILogger<QueueConsumer> _logger;
-        private readonly IOptions<MessagingConfiguration> _configuration;
+        private readonly MessagingConfiguration _configuration;
 
         public QueueConsumer(ILogger<QueueConsumer> logger, IOptions<MessagingConfiguration> configuration)
         {
-            _configuration = configuration;
+            _configuration = configuration.Value;
             _logger = logger;
             InitializeRabbitMQ();
         }
 
         private void InitializeRabbitMQ()
         {
-            var factory = new ConnectionFactory { HostName = _configuration.Value.Host };
+            var factory = new ConnectionFactory { HostName = _configuration.Host };
 
             _connection = factory.CreateConnection();
             _channel = _connection.CreateModel();
@@ -40,7 +40,7 @@ namespace sensor.api.Messaging
                 _logger.LogInformation(message);
             };
 
-            _channel.BasicConsume(queue: _configuration.Value.QueueName, autoAck: true, consumer: consumer);
+            _channel.BasicConsume(queue: _configuration.QueueName, autoAck: true, consumer: consumer);
 
             return Task.CompletedTask;
         }
