@@ -1,4 +1,5 @@
 using sensor.api.Messaging;
+using sensor.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,9 @@ builder.Services.AddMediatR(cfg =>
 });
 
 builder.Services.Configure<MessagingConfiguration>(builder.Configuration.GetSection("Messaging"));
+builder.Services.Configure<MongoDbConfiguration>(builder.Configuration.GetSection("MongoDb"));
+
+builder.Services.AddInfrastructure(builder.Configuration);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
