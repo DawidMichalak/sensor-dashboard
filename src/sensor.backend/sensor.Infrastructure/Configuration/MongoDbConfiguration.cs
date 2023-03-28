@@ -1,5 +1,4 @@
-﻿
-namespace sensor.Infrastructure
+﻿namespace sensor.Infrastructure.Configuration
 {
     public class MongoDbConfiguration
     {

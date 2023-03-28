@@ -1,5 +1,5 @@
 using sensor.api.Messaging;
-using sensor.Infrastructure;
+using sensor.Infrastructure.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
