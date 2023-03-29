@@ -10,4 +10,8 @@
     <Folder Include="Contracts\Persistence\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\sensor.Domain\sensor.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
