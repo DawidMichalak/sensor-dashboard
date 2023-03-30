@@ -10,11 +10,14 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { LayoutModule } from '@angular/cdk/layout';
+import { HttpClientModule } from '@angular/common/http';
+import { SensorReadingsComponent } from './sensor-readings/sensor-readings.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent
+    DashboardComponent,
+    SensorReadingsComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +27,8 @@ import { LayoutModule } from '@angular/cdk/layout';
     MatMenuModule,
     MatIconModule,
     MatButtonModule,
-    LayoutModule
+    LayoutModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
