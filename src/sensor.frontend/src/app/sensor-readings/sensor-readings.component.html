@@ -1,4 +1,9 @@
-<div *ngFor="let reading of readings">
-    {{reading.value}}
-    {{reading.timestamp}}
+<div class="chart-container">
+    <canvas baseChart
+      [type]="'line'"
+      [data]="lineChartData"
+      [options]="lineChartOptions"
+      [legend]="false">
+    </canvas>
 </div>
+  
