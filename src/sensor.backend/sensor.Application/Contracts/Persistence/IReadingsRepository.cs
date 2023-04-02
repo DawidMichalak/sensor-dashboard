@@ -7,6 +7,6 @@ namespace sensor.Application.Contracts.Persistence
     {
         Task AddReading(Reading reading);
 
-        Task<IEnumerable<Reading>> GetReadings(Expression<Func<Reading, bool>> filter);
+        Task<IEnumerable<ReadingsDto>> GetReadings();
     }
 }

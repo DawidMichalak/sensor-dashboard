@@ -1,4 +1,6 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
+using sensor.Application.Contracts;
 using sensor.Application.Contracts.Persistence;
 using sensor.Domain.Models;
 using System.Linq.Expressions;
@@ -14,9 +16,43 @@ namespace sensor.Infrastructure.Persistence.Repositories
             _collection = dbClient.Database.GetCollection<Reading>("readings");
         }
 
-        public async Task<IEnumerable<Reading>> GetReadings(Expression<Func<Reading, bool>> filter)
+        public async Task<IEnumerable<ReadingsDto>> GetReadings()
         {
-            var readings = await _collection.Find(filter).ToListAsync();
+            var pipeline = new BsonDocument[]
+            {
+                new BsonDocument("$group",
+                new BsonDocument
+                    {
+                        { "_id",
+                new BsonDocument
+                        {
+                            { "sensorId", "$metadata.sensorId" },
+                            { "type", "$metadata.type" }
+                        } },
+                        { "values",
+                new BsonDocument("$push", "$value") },
+                        { "timestamps",
+                new BsonDocument("$push", "$timestamp") },
+                        { "maxValue",
+                new BsonDocument("$max", "$value") },
+                        { "minValue",
+                new BsonDocument("$min", "$value") }
+                    }),
+                new BsonDocument("$project",
+                new BsonDocument
+                    {
+                        { "_id", 0 },
+                        { "sensorId", "$_id.sensorId" },
+                        { "type", "$_id.type" },
+                        { "values", 1 },
+                        { "timestamps", 1 },
+                        { "maxValue", 1 },
+                        { "minValue", 1 }
+                    })
+            };
+
+
+            var readings = await _collection.Aggregate<ReadingsDto>(pipeline).ToListAsync();
 
             return readings;
         }

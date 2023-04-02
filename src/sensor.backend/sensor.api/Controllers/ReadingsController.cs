@@ -18,7 +18,7 @@ namespace sensor.api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetReadings()
         {
-            var readings = await _readingsRepository.GetReadings(x => true);
+            var readings = await _readingsRepository.GetReadings();
             return Ok(readings);
         }
 
