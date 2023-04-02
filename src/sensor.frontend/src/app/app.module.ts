@@ -12,12 +12,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { LayoutModule } from '@angular/cdk/layout';
 import { HttpClientModule } from '@angular/common/http';
 import { SensorReadingsComponent } from './sensor-readings/sensor-readings.component';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    SensorReadingsComponent
+    SensorReadingsComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,6 +30,7 @@ import { SensorReadingsComponent } from './sensor-readings/sensor-readings.compo
     MatButtonModule,
     LayoutModule,
     HttpClientModule,
+    NgChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,7 @@
 .dashboard-card-content {
   text-align: center;
   padding: 30px;
+  height: 100%;
 }
 
 .grid-container {
