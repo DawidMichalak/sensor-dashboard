@@ -20,6 +20,19 @@ namespace sensor.Infrastructure.Persistence.Repositories
         {
             var pipeline = new BsonDocument[]
             {
+                new BsonDocument("$project",
+                new BsonDocument
+                    {
+                        { "value",
+                new BsonDocument("$round",
+                new BsonArray
+                            {
+                                "$value",
+                                1
+                            }) },
+                        { "timestamp", 1 },
+                        { "metadata", 1 }
+                    }),
                 new BsonDocument("$group",
                 new BsonDocument
                     {
@@ -50,7 +63,6 @@ namespace sensor.Infrastructure.Persistence.Repositories
                         { "minValue", 1 }
                     })
             };
-
 
             var readings = await _collection.Aggregate<ReadingsDto>(pipeline).ToListAsync();
 
