@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using sensor.api.Messaging.Processing;
 using System.Text;
 
 namespace sensor.api.Messaging
@@ -10,12 +11,14 @@ namespace sensor.api.Messaging
         private IConnection _connection;
         private IModel _channel;
         private readonly ILogger<QueueConsumer> _logger;
+        private readonly IServiceProvider _serviceProvider;
         private readonly MessagingConfiguration _configuration;
 
-        public QueueConsumer(ILogger<QueueConsumer> logger, IOptions<MessagingConfiguration> configuration)
+        public QueueConsumer(ILogger<QueueConsumer> logger, IOptions<MessagingConfiguration> configuration, IServiceProvider serviceProvider)
         {
             _configuration = configuration.Value;
             _logger = logger;
+            _serviceProvider = serviceProvider;
             InitializeRabbitMQ();
         }
 
@@ -33,11 +36,18 @@ namespace sensor.api.Messaging
 
             var consumer = new EventingBasicConsumer(_channel);
 
-            consumer.Received += (ModuleHandle, ea) =>
+            consumer.Received += async (ModuleHandle, ea) =>
             {
                 var body = ea.Body.ToArray();
                 var message = Encoding.UTF8.GetString(body);
+                var timestamp = ea.BasicProperties.Timestamp.UnixTime;
                 _logger.LogInformation(message);
+
+                using (IServiceScope scope = _serviceProvider.CreateScope())
+                {
+                    var messageProcessor = scope.ServiceProvider.GetRequiredService<ISensorMessageProcessor>();
+                    await messageProcessor.ProcessMessage(message, timestamp);
+                }
             };
 
             _channel.BasicConsume(queue: _configuration.QueueName, autoAck: true, consumer: consumer);

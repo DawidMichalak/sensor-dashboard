@@ -57,9 +57,9 @@ namespace sensor.Infrastructure.Persistence.Repositories
             return readings;
         }
 
-        public async Task AddReading(Reading reading)
+        public Task AddReading(Reading reading)
         {
-            await _collection.InsertOneAsync(reading);
+            return _collection.InsertOneAsync(reading);
         }
     }
 }
