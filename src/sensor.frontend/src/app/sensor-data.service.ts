@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { Reading } from './sensor-readings/reading';
+import { Readings } from './sensor-readings/readings';
 
 @Injectable({
   providedIn: 'root'
@@ -21,19 +21,15 @@ export class SensorDataService {
 
   private handleError<T>(result?: T) {
     return (error: any): Observable<T> => {
-  
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-  
-      // Let the app keep running by returning an empty result.
+      console.error(error); 
       return of(result as T);
     };
   }
 
-  getReadings(): Observable<Reading[]> {
-    return this.http.get<Reading[]>(this.apiUrl).pipe(
+  getReadings(): Observable<Readings[]> {
+    return this.http.get<Readings[]>(this.apiUrl).pipe(
       tap(_ => console.log("fetch")),
-      catchError(this.handleError<Reading[]>([]))
+      catchError(this.handleError<Readings[]>([]))
     );
   }
 }

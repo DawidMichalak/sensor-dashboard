@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { SensorDataService } from '../sensor-data.service';
+import { Readings } from '../sensor-readings/readings';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,12 +8,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent {
-  cards = [
-    { title: 'Card 1', cols: 1, rows: 1 },
-    { title: 'Card 2', cols: 1, rows: 1 },
-    { title: 'Card 3', cols: 1, rows: 1 },
-    { title: 'Card 4', cols: 1, rows: 1 },
-  ];
 
-  constructor() {}
+  readings: Readings[] = [];
+
+  constructor(private dataService: SensorDataService) {}
+
+  ngOnInit(): void {
+    this.dataService.getReadings().subscribe((data: Readings[]) => {
+      this.readings = data;
+    });
+  }
 }

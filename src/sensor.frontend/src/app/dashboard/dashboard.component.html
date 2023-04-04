@@ -6,7 +6,7 @@
       </mat-card-title>
     </mat-card-header>
     <mat-card-content class="dashboard-card-content">
-      <app-sensor-readings></app-sensor-readings>
+      <app-sensor-readings *ngIf="readings.length" [sensorData]="readings[0]"></app-sensor-readings>
     </mat-card-content>
   </mat-card>
 </section>
