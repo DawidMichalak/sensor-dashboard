@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { SensorDataService } from '../sensor-data.service';
-import { Reading } from './reading';
-import { ChartConfiguration, ChartOptions, ChartType } from "chart.js";
+import { Component, Input, OnInit } from '@angular/core';
+import { ChartOptions } from "chart.js";
+import Chart from 'chart.js/auto';
 
 @Component({
   selector: 'app-sensor-readings',
@@ -9,39 +8,33 @@ import { ChartConfiguration, ChartOptions, ChartType } from "chart.js";
   styleUrls: ['./sensor-readings.component.css']
 })
 export class SensorReadingsComponent implements OnInit{
+  constructor() {}
+  @Input() public sensorData:any = {};
 
-  readings: Reading[] = [];
+  public chart: any;
 
-  constructor(private dataService: SensorDataService) {}
-  
-  ngOnInit(): void {
-    this.dataService.getReadings().subscribe(readings => this.readings = readings);
+  ngOnInit(){
+    this.createChart();
   }
 
-  public lineChartData: ChartConfiguration<'line'>['data'] = {
-    labels: [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July'
-    ],
-    datasets: [
-      {
-        data: [ 65, 59, 80, 81, 56, 55, 40 ],
-        label: 'Series A',
-        fill: true,
-        tension: 0.5,
-        borderColor: 'black',
-        backgroundColor: 'rgba(255,0,0,0.3)'
-      }
-    ]
-  };
+  createChart(){
+    this.chart = new Chart("MyChart", {
+      type: 'line',
+      data: {
+        labels: this.sensorData.timestamps, 
+	       datasets: [
+          {
+            data: this.sensorData.values,
+          },
+        ]
+      },
+      options: this.lineChartOptions
+      
+    });
+  }
+
   public lineChartOptions: ChartOptions<'line'> = {
     responsive: true,
     maintainAspectRatio: false
   };
-
 }
