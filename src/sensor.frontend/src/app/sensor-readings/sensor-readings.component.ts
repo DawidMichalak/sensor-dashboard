@@ -1,40 +1,60 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ChartOptions } from "chart.js";
+import { ChartOptions, Scale } from 'chart.js';
 import Chart from 'chart.js/auto';
+import 'chartjs-adapter-luxon';
 
 @Component({
   selector: 'app-sensor-readings',
   templateUrl: './sensor-readings.component.html',
-  styleUrls: ['./sensor-readings.component.css']
+  styleUrls: ['./sensor-readings.component.css'],
 })
-export class SensorReadingsComponent implements OnInit{
+export class SensorReadingsComponent implements OnInit {
   constructor() {}
-  @Input() public sensorData:any = {};
+  @Input() public sensorData: any = {};
 
   public chart: any;
 
-  ngOnInit(){
+  ngOnInit() {
     this.createChart();
   }
 
-  createChart(){
-    this.chart = new Chart("MyChart", {
+  createChart() {
+    this.chart = new Chart('MyChart', {
       type: 'line',
       data: {
-        labels: this.sensorData.timestamps, 
-	       datasets: [
+        labels: this.sensorData.timestamps,
+        datasets: [
           {
+            label: 'Temperature',
+            borderColor: '#00609E',
             data: this.sensorData.values,
           },
-        ]
+        ],
       },
-      options: this.lineChartOptions
-      
+      options: this.lineChartOptions,
     });
   }
 
   public lineChartOptions: ChartOptions<'line'> = {
     responsive: true,
-    maintainAspectRatio: false
+    maintainAspectRatio: false,
+    scales: {
+      x: {
+        type: 'time',
+        ticks: {
+          major: {
+            enabled: true,
+          },
+          font: (ctx) => {
+            const weight = ctx.tick && ctx.tick.major ? 'bold' : '';
+            return { weight: weight };
+          },
+        },
+        time: {
+          unit: 'hour',
+          displayFormats: { hour: 'HH:mm' },
+        },
+      },
+    },
   };
 }
