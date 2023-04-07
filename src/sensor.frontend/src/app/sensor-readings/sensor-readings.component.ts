@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ChartOptions, Scale } from 'chart.js';
 import Chart from 'chart.js/auto';
 import 'chartjs-adapter-luxon';
+import { DateTime } from 'luxon';
 
 @Component({
   selector: 'app-sensor-readings',
@@ -54,6 +55,9 @@ export class SensorReadingsComponent implements OnInit {
           unit: 'hour',
           displayFormats: { hour: 'HH:mm' },
         },
+        //min: '2023-04-04T14:55:46Z',
+        min: DateTime.now().minus({ days: 3 }).endOf('day').toString(),
+        max: DateTime.now().toString(),
       },
     },
   };
