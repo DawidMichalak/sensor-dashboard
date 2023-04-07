@@ -1,31 +1,35 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using sensor.Application.Contracts.Persistence;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using sensor.Api.Requests;
+using sensor.Application.Readings.Commands;
+using sensor.Application.Readings.Queries;
 using sensor.Domain.Models;
 
-namespace sensor.api.Controllers
+namespace sensor.Api.Controllers
 {
     [ApiController]
     [Route("readings")]
     public class ReadingsController : ControllerBase
     {
-        private readonly IReadingsRepository _readingsRepository;
+        private readonly IMediator _mediator;
 
-        public ReadingsController(IReadingsRepository readingsRepository)
+        public ReadingsController(IMediator mediator)
         {
-            _readingsRepository = readingsRepository;
+            _mediator = mediator;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetReadings()
+        public async Task<IActionResult> GetReadings([FromBody] GetReadingRequest request)
         {
-            var readings = await _readingsRepository.GetReadings();
+            var readings = await _mediator.Send(new GetReadingsQuery { BeginDate = request.BeginDate, EndDate = request.EndDate });
             return Ok(readings);
         }
 
         [HttpPost]
         public async Task<IActionResult> AddReading([FromBody] Reading reading)
         {
-            await _readingsRepository.AddReading(reading);
+            var command = new AddReadingCommand() { Reading = reading };
+            await _mediator.Send(command);
             return Ok();
         }
     }

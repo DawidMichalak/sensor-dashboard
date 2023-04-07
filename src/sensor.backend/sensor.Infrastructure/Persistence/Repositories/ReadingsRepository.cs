@@ -3,7 +3,6 @@ using MongoDB.Driver;
 using sensor.Application.Contracts;
 using sensor.Application.Contracts.Persistence;
 using sensor.Domain.Models;
-using System.Linq.Expressions;
 
 namespace sensor.Infrastructure.Persistence.Repositories
 {
@@ -16,10 +15,15 @@ namespace sensor.Infrastructure.Persistence.Repositories
             _collection = dbClient.Database.GetCollection<Reading>("readings");
         }
 
-        public async Task<IEnumerable<ReadingsDto>> GetReadings()
+        public async Task<IEnumerable<ReadingsDto>> GetReadingsAsync()
         {
             var pipeline = new BsonDocument[]
             {
+                new BsonDocument("$match", new BsonDocument("timestamp", new BsonDocument
+                    {
+                        { "$gt", 0 },
+                        { "$lt", 0 }
+                    })),
                 new BsonDocument("$sort",
                     new BsonDocument("timestamp", 1)),
                 new BsonDocument("$project",
@@ -71,7 +75,7 @@ namespace sensor.Infrastructure.Persistence.Repositories
             return readings;
         }
 
-        public Task AddReading(Reading reading)
+        public Task AddReadingAsync(Reading reading)
         {
             return _collection.InsertOneAsync(reading);
         }

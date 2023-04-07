@@ -5,8 +5,8 @@ namespace sensor.Application.Contracts.Persistence
 {
     public interface IReadingsRepository
     {
-        Task AddReading(Reading reading);
+        Task AddReadingAsync(Reading reading);
 
-        Task<IEnumerable<ReadingsDto>> GetReadings();
+        Task<IEnumerable<ReadingsDto>> GetReadingsAsync();
     }
 }

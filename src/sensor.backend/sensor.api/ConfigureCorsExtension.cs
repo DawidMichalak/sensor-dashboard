@@ -1,4 +1,4 @@
-﻿namespace sensor.api
+﻿namespace sensor.Api
 {
     public static class ConfigureCorsExtension
     {
