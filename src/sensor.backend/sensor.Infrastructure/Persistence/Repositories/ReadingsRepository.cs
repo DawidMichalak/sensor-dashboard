@@ -20,6 +20,8 @@ namespace sensor.Infrastructure.Persistence.Repositories
         {
             var pipeline = new BsonDocument[]
             {
+                new BsonDocument("$sort",
+                    new BsonDocument("timestamp", 1)),
                 new BsonDocument("$project",
                 new BsonDocument
                     {
