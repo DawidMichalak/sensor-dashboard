@@ -7,6 +7,6 @@ namespace sensor.Application.Contracts.Persistence
     {
         Task AddReadingAsync(Reading reading);
 
-        Task<IEnumerable<ReadingsDto>> GetReadingsAsync();
+        Task<IEnumerable<ReadingsDto>> GetReadingsAsync(DateTime beginDate, DateTime endDate);
     }
 }

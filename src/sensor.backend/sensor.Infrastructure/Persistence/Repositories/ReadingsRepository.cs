@@ -15,14 +15,14 @@ namespace sensor.Infrastructure.Persistence.Repositories
             _collection = dbClient.Database.GetCollection<Reading>("readings");
         }
 
-        public async Task<IEnumerable<ReadingsDto>> GetReadingsAsync()
+        public async Task<IEnumerable<ReadingsDto>> GetReadingsAsync(DateTime beginDate, DateTime endDate)
         {
             var pipeline = new BsonDocument[]
             {
                 new BsonDocument("$match", new BsonDocument("timestamp", new BsonDocument
                     {
-                        { "$gt", 0 },
-                        { "$lt", 0 }
+                        { "$gt", beginDate },
+                        { "$lt", endDate }
                     })),
                 new BsonDocument("$sort",
                     new BsonDocument("timestamp", 1)),

@@ -19,7 +19,7 @@ namespace sensor.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetReadings([FromBody] GetReadingRequest request)
+        public async Task<IActionResult> GetReadings([FromQuery] GetReadingRequest request)
         {
             var readings = await _mediator.Send(new GetReadingsQuery { BeginDate = request.BeginDate, EndDate = request.EndDate });
             return Ok(readings);

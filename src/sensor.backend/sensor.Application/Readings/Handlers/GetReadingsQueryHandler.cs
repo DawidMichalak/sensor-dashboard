@@ -16,7 +16,12 @@ namespace sensor.Application.Readings.Handlers
 
         public async Task<IEnumerable<ReadingsDto>> Handle(GetReadingsQuery request, CancellationToken cancellationToken)
         {
-            return await _readingsRepository.GetReadingsAsync();
+            if (request.BeginDate > request.EndDate)
+            {
+                throw new Exception();
+            }
+
+            return await _readingsRepository.GetReadingsAsync(request.BeginDate, request.EndDate);
         }
     }
 }
