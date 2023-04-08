@@ -10,7 +10,6 @@ import { DateTime } from 'luxon';
   styleUrls: ['./sensor-readings.component.css'],
 })
 export class SensorReadingsComponent implements OnInit {
-  constructor() {}
   @Input() public sensorData: any = {};
 
   public chart: any;
@@ -55,7 +54,6 @@ export class SensorReadingsComponent implements OnInit {
           unit: 'hour',
           displayFormats: { hour: 'HH:mm' },
         },
-        //min: '2023-04-04T14:55:46Z',
         min: DateTime.now().minus({ days: 3 }).endOf('day').toString(),
         max: DateTime.now().toString(),
       },
