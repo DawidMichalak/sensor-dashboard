@@ -15,15 +15,36 @@ namespace sensor.Infrastructure.Persistence.Repositories
             _collection = dbClient.Database.GetCollection<Reading>("readings");
         }
 
-        public async Task<IEnumerable<ReadingsDto>> GetReadingsAsync(DateTime beginDate, DateTime endDate)
+        public async Task<IEnumerable<ReadingsDto>> GetAllReadingsAsync(DateTime beginDate, DateTime endDate)
         {
-            var pipeline = new BsonDocument[]
+            var pipeline = GetAggregationStages();
+            AddDateFilter(pipeline, beginDate, endDate);
+
+            var readings = await _collection.Aggregate<ReadingsDto>(pipeline.ToArray()).ToListAsync();
+
+            return readings;
+        }
+
+        public async Task<ReadingsDto> GetReadingsAsync(DateTime beginDate, DateTime endDate, int sensorId)
+        {
+            var pipeline = GetAggregationStages();
+            AddDateFilter(pipeline, beginDate, endDate);
+            AddSensorFilter(pipeline, sensorId);
+
+            var readings = await _collection.Aggregate<ReadingsDto>(pipeline.ToArray()).FirstAsync();
+
+            return readings;
+        }
+
+        public Task AddReadingAsync(Reading reading)
+        {
+            return _collection.InsertOneAsync(reading);
+        }
+
+        private LinkedList<BsonDocument> GetAggregationStages()
+        {
+            var stages = new BsonDocument[]
             {
-                new BsonDocument("$match", new BsonDocument("timestamp", new BsonDocument
-                    {
-                        { "$gt", beginDate },
-                        { "$lt", endDate }
-                    })),
                 new BsonDocument("$sort",
                     new BsonDocument("timestamp", 1)),
                 new BsonDocument("$project",
@@ -69,15 +90,30 @@ namespace sensor.Infrastructure.Persistence.Repositories
                         { "minValue", 1 }
                     })
             };
-
-            var readings = await _collection.Aggregate<ReadingsDto>(pipeline).ToListAsync();
-
-            return readings;
+            return new LinkedList<BsonDocument>(stages);
         }
 
-        public Task AddReadingAsync(Reading reading)
+        private void AddDateFilter(LinkedList<BsonDocument> stages, DateTime beginDate, DateTime endDate)
         {
-            return _collection.InsertOneAsync(reading);
+            stages.AddFirst(
+                new BsonDocument("$match",
+                    new BsonDocument("timestamp",
+                        new BsonDocument
+                        {
+                            { "$gt", beginDate },
+                            { "$lt", endDate }
+                        })
+                    )
+                );
+        }
+
+        private void AddSensorFilter(LinkedList<BsonDocument> stages, int sensorId)
+        {
+            stages.AddFirst(
+                new BsonDocument("$match",
+                    new BsonDocument("metadata.sensorId", sensorId)
+                    )
+                );
         }
     }
 }

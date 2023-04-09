@@ -45,7 +45,7 @@ namespace UnitTests.Readings.Handlers
                 new ReadingsDto(),
             };
 
-            _repositoryMock.Setup(x => x.GetReadingsAsync(request.BeginDate, request.EndDate))
+            _repositoryMock.Setup(x => x.GetAllReadingsAsync(request.BeginDate, request.EndDate))
                 .ReturnsAsync(readings);
 
             var result = await _sut.Handle(request, CancellationToken.None);

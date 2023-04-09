@@ -21,7 +21,16 @@ namespace sensor.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetReadings([FromQuery] GetReadingRequest request)
         {
-            var readings = await _mediator.Send(new GetReadingsQuery { BeginDate = request.BeginDate, EndDate = request.EndDate });
+            var query = new GetReadingsQuery { BeginDate = request.BeginDate, EndDate = request.EndDate };
+            var readings = await _mediator.Send(query);
+            return Ok(readings);
+        }
+
+        [HttpGet("{sensorId}")]
+        public async Task<IActionResult> GetSensorReadings([FromQuery] GetReadingRequest request, [FromRoute] int sensorId)
+        {
+            var query = new GetSensorReadingsQuery { BeginDate = request.BeginDate, EndDate = request.EndDate, SensorId = sensorId };
+            var readings = await _mediator.Send(query);
             return Ok(readings);
         }
 
