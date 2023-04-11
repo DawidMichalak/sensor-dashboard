@@ -1,10 +1,7 @@
 <section class="grid-container">
-  <mat-card class="dashboard-card" *ngFor="let reading of readings">
-    <mat-card-header>
-      <mat-card-title> Sensor Data - {{ reading.sensorId }} </mat-card-title>
-    </mat-card-header>
-    <mat-card-content class="dashboard-card-content">
-      <app-sensor-readings [sensorData]="reading"></app-sensor-readings>
-    </mat-card-content>
-  </mat-card>
+  <app-sensor-readings
+    [sensorData]="reading"
+    *ngFor="let reading of readings"
+    class="sensor-reading"
+  ></app-sensor-readings>
 </section>

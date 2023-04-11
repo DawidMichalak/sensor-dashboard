@@ -4,22 +4,26 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatChipsModule } from '@angular/material/chips';
 import { LayoutModule } from '@angular/cdk/layout';
 import { HttpClientModule } from '@angular/common/http';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { SensorReadingsComponent } from './sensor-readings/sensor-readings.component';
+import { DateRangeSelectionComponent } from './date-range-selection/date-range-selection.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     SensorReadingsComponent,
+    DateRangeSelectionComponent,
   ],
   imports: [
+    MatChipsModule,
     BrowserModule,
     BrowserAnimationsModule,
     MatSlideToggleModule,
@@ -31,6 +35,6 @@ import { SensorReadingsComponent } from './sensor-readings/sensor-readings.compo
     HttpClientModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

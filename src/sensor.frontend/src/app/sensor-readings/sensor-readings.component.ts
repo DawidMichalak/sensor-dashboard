@@ -3,6 +3,7 @@ import { ChartOptions, Scale } from 'chart.js';
 import Chart from 'chart.js/auto';
 import 'chartjs-adapter-luxon';
 import { DateTime } from 'luxon';
+import { SensorDataService } from '../sensor-data.service';
 
 @Component({
   selector: 'app-sensor-readings',
@@ -10,6 +11,8 @@ import { DateTime } from 'luxon';
   styleUrls: ['./sensor-readings.component.css'],
 })
 export class SensorReadingsComponent implements OnInit {
+  constructor(private dataService: SensorDataService) {}
+
   @Input() public sensorData: any = {};
 
   public chart: any;
@@ -56,6 +59,16 @@ export class SensorReadingsComponent implements OnInit {
         },
         min: DateTime.now().minus({ days: 3 }).endOf('day').toString(),
         max: DateTime.now().toString(),
+      },
+    },
+    elements: {
+      point: {
+        radius: 0,
+      },
+    },
+    plugins: {
+      legend: {
+        display: false,
       },
     },
   };
