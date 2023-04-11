@@ -25,14 +25,31 @@ export class SensorDataService {
     };
   }
 
-  getReadings(): Observable<Readings[]> {
+  getDefaultReadings(): Observable<Readings[]> {
+    const beginDate = DateTime.now().minus({ days: 2 });
+
+    return this.getReadings<Readings[]>(beginDate);
+  }
+
+  getSelectedReadings(start: DateTime, sensorId: number): Observable<Readings> {
+    return this.getReadings<Readings>(start, sensorId);
+  }
+
+  private getReadings<Type>(
+    beginDate: DateTime,
+    sensorId?: number
+  ): Observable<Type> {
+    let url = this.apiUrl;
+    if (sensorId) {
+      url += `/${sensorId}`;
+    }
+
     const options = {
       params: new HttpParams()
-        .set('BeginDate', DateTime.now().minus({ days: 3 }).toISO() ?? '')
-        .set('EndDate', DateTime.now().toISO() ?? ''),
+        .set('BeginDate', beginDate.toISO()!)
+        .set('EndDate', DateTime.now().toISO()!),
     };
-    return this.http
-      .get<Readings[]>(this.apiUrl, options)
-      .pipe(catchError(this.handleError<Readings[]>([])));
+
+    return this.http.get<Type>(url, options);
   }
 }

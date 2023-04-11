@@ -8,13 +8,12 @@ import { Readings } from '../sensor-readings/readings';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent {
-
   readings: Readings[] = [];
 
   constructor(private dataService: SensorDataService) {}
 
   ngOnInit(): void {
-    this.dataService.getReadings().subscribe((data: Readings[]) => {
+    this.dataService.getDefaultReadings().subscribe((data: Readings[]) => {
       this.readings = data;
     });
   }

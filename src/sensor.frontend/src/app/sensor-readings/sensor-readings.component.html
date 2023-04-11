@@ -1,9 +1,9 @@
 <div class="dashboard-card">
     <div class="card-header">
         <mat-card-title> Sensor Data - {{ sensorData.sensorId }} </mat-card-title>
-        <app-date-range-selection/>
+        <app-date-range-selection (newStartDateEvent)="updateDateRange($event)"/>
     </div>
-        <div class="chart-container">
-            <canvas id="MyChart">{{chart}}</canvas>
-        </div>
+    <div class="chart-container">
+        <canvas id="MyChart">{{chart}}</canvas>
+    </div>
 </div>

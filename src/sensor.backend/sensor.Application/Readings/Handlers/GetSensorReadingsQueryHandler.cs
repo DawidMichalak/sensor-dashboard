@@ -13,6 +13,7 @@ namespace sensor.Application.Readings.Handlers
         {
             _readingsRepository = readingsRepository;
         }
+
         public async Task<ReadingsDto> Handle(GetSensorReadingsQuery request, CancellationToken cancellationToken)
         {
             if (request.BeginDate > request.EndDate)
@@ -20,7 +21,14 @@ namespace sensor.Application.Readings.Handlers
                 throw new Exception();
             }
 
-            return await _readingsRepository.GetReadingsAsync(request.BeginDate, request.EndDate, request.SensorId);
+            var readings = await _readingsRepository.GetReadingsAsync(request.BeginDate, request.EndDate, request.SensorId);
+
+            if (readings == null)
+            {
+                readings = new ReadingsDto { SensorId = request.SensorId };
+            }
+
+            return readings;
         }
     }
 }

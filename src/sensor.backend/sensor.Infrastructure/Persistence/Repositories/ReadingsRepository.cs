@@ -31,7 +31,7 @@ namespace sensor.Infrastructure.Persistence.Repositories
             AddDateFilter(pipeline, beginDate, endDate);
             AddSensorFilter(pipeline, sensorId);
 
-            var readings = await _collection.Aggregate<ReadingsDto>(pipeline.ToArray()).FirstAsync();
+            var readings = await _collection.Aggregate<ReadingsDto>(pipeline.ToArray()).FirstOrDefaultAsync();
 
             return readings;
         }

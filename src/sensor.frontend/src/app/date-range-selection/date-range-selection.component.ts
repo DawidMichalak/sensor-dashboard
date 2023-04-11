@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { TimeSelectionService } from './time-selection.service';
+import { Output, EventEmitter } from '@angular/core';
+import { DateTime } from 'luxon';
 
 @Component({
   selector: 'app-date-range-selection',
@@ -9,11 +11,16 @@ import { TimeSelectionService } from './time-selection.service';
 export class DateRangeSelectionComponent {
   constructor(private timeService: TimeSelectionService) {}
 
+  @Output() newStartDateEvent = new EventEmitter<DateTime>();
+
   chips = this.timeService.getSelectOptions();
-  selectedChip: string = this.chips[0];
+  selectedChip: string = this.chips[1];
 
   onChipClicked(chip: string) {
     this.selectedChip = chip;
+    this.newStartDateEvent.emit(
+      this.timeService.getSelectedDate(this.selectedChip)
+    );
     console.log(`Selected chip: ${chip}`);
   }
 }
