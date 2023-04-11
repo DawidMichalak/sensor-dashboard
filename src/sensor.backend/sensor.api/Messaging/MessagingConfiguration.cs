@@ -1,4 +1,4 @@
-﻿namespace sensor.api.Messaging
+﻿namespace sensor.Api.Messaging
 {
     public class MessagingConfiguration
     {

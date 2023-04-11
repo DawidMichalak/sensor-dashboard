@@ -1,6 +1,6 @@
-﻿using sensor.api.Messaging.Processing;
+﻿using sensor.Api.Messaging.Processing;
 
-namespace sensor.api.Messaging
+namespace sensor.Api.Messaging
 {
     public static class ConfigureServicesExtension
     {

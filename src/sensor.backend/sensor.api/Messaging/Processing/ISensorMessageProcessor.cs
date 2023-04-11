@@ -1,4 +1,4 @@
-﻿namespace sensor.api.Messaging.Processing
+﻿namespace sensor.Api.Messaging.Processing
 {
     public interface ISensorMessageProcessor
     {

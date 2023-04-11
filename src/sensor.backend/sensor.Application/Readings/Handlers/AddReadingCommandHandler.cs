@@ -1,8 +1,8 @@
 ﻿using MediatR;
-using sensor.Application.Commands;
 using sensor.Application.Contracts.Persistence;
+using sensor.Application.Readings.Commands;
 
-namespace sensor.Application.Handlers
+namespace sensor.Application.Readings.Handlers
 {
     public class AddReadingCommandHandler : IRequestHandler<AddReadingCommand>
     {
@@ -15,7 +15,7 @@ namespace sensor.Application.Handlers
 
         public Task Handle(AddReadingCommand request, CancellationToken cancellationToken)
         {
-            return _readingsRepository.AddReading(request.Reading);
+            return _readingsRepository.AddReadingAsync(request.Reading);
         }
     }
 }

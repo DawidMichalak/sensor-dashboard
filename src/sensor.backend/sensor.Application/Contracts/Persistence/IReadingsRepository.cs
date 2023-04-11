@@ -5,8 +5,10 @@ namespace sensor.Application.Contracts.Persistence
 {
     public interface IReadingsRepository
     {
-        Task AddReading(Reading reading);
+        Task AddReadingAsync(Reading reading);
 
-        Task<IEnumerable<ReadingsDto>> GetReadings();
+        Task<IEnumerable<ReadingsDto>> GetAllReadingsAsync(DateTime beginDate, DateTime endDate);
+
+        Task<ReadingsDto> GetReadingsAsync(DateTime beginDate, DateTime endDate, int sensorId);
     }
 }

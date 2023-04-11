@@ -1,0 +1,9 @@
+<mat-chip-set>
+  <mat-chip-option
+    *ngFor="let chip of chips"
+    [selected]="chip === selectedChip"
+    (click)="onChipClicked(chip)"
+  >
+    {{ chip }}
+  </mat-chip-option>
+</mat-chip-set>

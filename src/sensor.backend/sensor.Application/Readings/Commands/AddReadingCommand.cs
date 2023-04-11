@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using sensor.Domain.Models;
 
-namespace sensor.Application.Commands
+namespace sensor.Application.Readings.Commands
 {
     public class AddReadingCommand : IRequest
     {

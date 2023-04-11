@@ -1,6 +1,6 @@
-using sensor.api;
-using sensor.api.Messaging;
-using sensor.Application.Commands;
+using sensor.Api;
+using sensor.Api.Messaging;
+using sensor.Application.Readings.Commands;
 using sensor.Infrastructure.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);

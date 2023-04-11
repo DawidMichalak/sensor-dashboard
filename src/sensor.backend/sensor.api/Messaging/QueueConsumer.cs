@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using sensor.api.Messaging.Processing;
+using sensor.Api.Messaging.Processing;
 using System.Text;
 
-namespace sensor.api.Messaging
+namespace sensor.Api.Messaging
 {
     public class QueueConsumer : BackgroundService
     {
