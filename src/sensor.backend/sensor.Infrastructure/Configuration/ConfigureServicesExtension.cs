@@ -31,6 +31,7 @@ namespace sensor.Infrastructure.Configuration
 
             services.AddSingleton<MongoDbClient>();
             services.AddScoped<IReadingsRepository, ReadingsRepository>();
+            services.AddScoped<ISensorsRepository, SensorsRepository>();
 
             return services;
         }
