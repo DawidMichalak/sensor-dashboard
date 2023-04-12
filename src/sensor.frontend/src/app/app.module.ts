@@ -13,7 +13,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SensorReadingsComponent } from './sensor-readings/sensor-readings.component';
-import { DateRangeSelectionComponent } from './date-range-selection/date-range-selection.component';
+import { DateRangeSelectionComponent } from './sensor-readings/date-range-selection/date-range-selection.component';
 
 @NgModule({
   declarations: [

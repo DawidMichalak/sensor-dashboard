@@ -1,27 +1,39 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  AfterContentInit,
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
 import { ChartOptions, Scale } from 'chart.js';
 import Chart from 'chart.js/auto';
 import 'chartjs-adapter-luxon';
 import { DateTime } from 'luxon';
 import { SensorDataService } from '../sensor-data.service';
 import { Readings } from './readings';
+import { SensorDetails } from '../dashboard/sensorDetails';
 
 @Component({
   selector: 'app-sensor-readings',
   templateUrl: './sensor-readings.component.html',
   styleUrls: ['./sensor-readings.component.css'],
 })
-export class SensorReadingsComponent implements OnInit {
-  constructor(private dataService: SensorDataService) {}
+export class SensorReadingsComponent implements AfterViewInit {
+  constructor(
+    private dataService: SensorDataService,
+    private cd: ChangeDetectorRef
+  ) {}
 
   @Input() public sensorData: any = {};
+  @Input() public sensorDetails!: SensorDetails;
 
   public chart: Chart | undefined;
   private chartStartDate = DateTime.now().minus({ days: 2 });
 
   updateDateRange(newStartDate: DateTime) {
     this.dataService
-      .getSelectedReadings(newStartDate, this.sensorData.sensorId)
+      .getSelectedReadings(newStartDate, this.sensorDetails.id)
       .subscribe((data: Readings) => {
         this.sensorData = data;
         this.chartStartDate = newStartDate;
@@ -29,18 +41,20 @@ export class SensorReadingsComponent implements OnInit {
         this.chart!.data.labels = this.sensorData.timestamps;
         this.chart!.data.datasets[0].data = this.sensorData.values;
         this.chart!.options = this.lineChartOptions();
-        const opt = this.lineChartOptions();
-
         this.chart?.update();
       });
   }
 
-  ngOnInit() {
-    this.createChart();
+  ngAfterViewInit(): void {
+    console.log(this.sensorData, this.sensorDetails);
+    if (this.sensorData) {
+      this.createChart();
+      this.cd.detectChanges();
+    }
   }
 
   createChart() {
-    this.chart = new Chart('MyChart', {
+    this.chart = new Chart(`Chart${this.sensorDetails.id}`, {
       type: 'line',
       data: {
         labels: this.sensorData.timestamps,

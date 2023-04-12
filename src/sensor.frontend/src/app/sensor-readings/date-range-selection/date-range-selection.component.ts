@@ -21,6 +21,5 @@ export class DateRangeSelectionComponent {
     this.newStartDateEvent.emit(
       this.timeService.getSelectedDate(this.selectedChip)
     );
-    console.log(`Selected chip: ${chip}`);
   }
 }

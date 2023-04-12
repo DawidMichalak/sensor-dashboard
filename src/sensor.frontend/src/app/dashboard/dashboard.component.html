@@ -1,7 +1,8 @@
-<section class="grid-container">
+<section class="grid-container" *ngIf="dataLoading === false">
   <app-sensor-readings
-    [sensorData]="reading"
-    *ngFor="let reading of readings"
+    *ngFor="let details of sensorDetails"
+    [sensorDetails]="details"
+    [sensorData]="GetReadingsForSensor(details)"
     class="sensor-reading"
   ></app-sensor-readings>
 </section>
