@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SensorReadingsComponent } from './sensor-readings/sensor-readings.component';
 import { DateRangeSelectionComponent } from './sensor-readings/date-range-selection/date-range-selection.component';
+import { ReadingsMenuComponent } from './sensor-readings/readings-menu/readings-menu.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { DateRangeSelectionComponent } from './sensor-readings/date-range-select
     DashboardComponent,
     SensorReadingsComponent,
     DateRangeSelectionComponent,
+    ReadingsMenuComponent,
   ],
   imports: [
     MatChipsModule,
