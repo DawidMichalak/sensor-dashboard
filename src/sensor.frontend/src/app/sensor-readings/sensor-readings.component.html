@@ -2,7 +2,7 @@
     <div class="card-header">
         <mat-card-title>{{ sensorDetails.name }}</mat-card-title>
         <app-date-range-selection (newStartDateEvent)="updateDateRange($event)"/>
-        <app-readings-menu/>
+        <app-readings-menu [sensorId]="sensorDetails.id"/>
     </div>
     <div class="chart-container">
         <canvas id="Chart{{ sensorDetails.id }}">{{chart}}</canvas>
