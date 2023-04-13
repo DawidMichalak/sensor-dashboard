@@ -28,6 +28,16 @@ namespace sensor.Infrastructure.Persistence.Repositories
         public Task AddSensorAsync(Sensor sensor)
         {
             return _collection.InsertOneAsync(sensor);
+        } 
+
+        public Task UpdateAsync(Sensor sensor)
+        {
+            return _collection.ReplaceOneAsync((x) => x.Id == sensor.Id, sensor);
+        }
+
+        public Task DeleteAsync(int sensorId)
+        {
+            return _collection.DeleteOneAsync((x) => x.Id == sensorId);
         }
     }
 }

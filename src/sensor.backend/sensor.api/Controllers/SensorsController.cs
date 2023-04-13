@@ -30,5 +30,19 @@ namespace sensor.Api.Controllers
             await _mediator.Send(command);
             return Ok();
         }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateSensor([FromBody] UpdateSensorCommand command)
+        {
+            await _mediator.Send(command);
+            return Ok();
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteSensor([FromBody] DeleteSensorCommand command)
+        {
+            await _mediator.Send(command);
+            return Ok();
+        }
     }
 }
