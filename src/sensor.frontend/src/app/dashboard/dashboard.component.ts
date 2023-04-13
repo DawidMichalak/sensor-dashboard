@@ -24,7 +24,7 @@ export class DashboardComponent {
       this.readings = data;
       this.dataLoading = false;
     });
-    this.detailsService.getSensorDetails().subscribe((data) => {
+    this.detailsService.getData().subscribe((data) => {
       this.sensorDetails = data;
     });
   }

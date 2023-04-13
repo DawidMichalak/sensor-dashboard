@@ -1,12 +1,10 @@
 import {
-  AfterContentInit,
   AfterViewInit,
   ChangeDetectorRef,
   Component,
   Input,
-  OnInit,
 } from '@angular/core';
-import { ChartOptions, Scale } from 'chart.js';
+import { ChartOptions } from 'chart.js';
 import Chart from 'chart.js/auto';
 import 'chartjs-adapter-luxon';
 import { DateTime } from 'luxon';
@@ -46,7 +44,6 @@ export class SensorReadingsComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    console.log(this.sensorData, this.sensorDetails);
     if (this.sensorData) {
       this.createChart();
       this.cd.detectChanges();

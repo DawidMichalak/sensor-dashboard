@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { SensorDetails } from './sensorDetails';
 
 @Injectable({
@@ -9,9 +9,23 @@ import { SensorDetails } from './sensorDetails';
 export class SensorDetailsService {
   private apiUrl = 'https://localhost:7288/sensors';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.getSensorDetails();
+  }
 
-  getSensorDetails(): Observable<SensorDetails[]> {
-    return this.http.get<SensorDetails[]>(this.apiUrl);
+  private sensorDetails = new BehaviorSubject<SensorDetails[]>([]);
+
+  getData() {
+    return this.sensorDetails.asObservable();
+  }
+
+  updateData(newData: SensorDetails[]) {
+    this.sensorDetails.next(newData);
+  }
+
+  private getSensorDetails() {
+    this.http.get<SensorDetails[]>(this.apiUrl).subscribe((data) => {
+      this.updateData(data);
+    });
   }
 }
