@@ -4,6 +4,7 @@ using sensor.Application.Contracts;
 using sensor.Application.Contracts.Persistence;
 using sensor.Application.Readings.Handlers;
 using sensor.Application.Readings.Queries;
+using sensor.Domain.Exceptions;
 
 namespace UnitTests.Readings.Handlers
 {
@@ -28,7 +29,7 @@ namespace UnitTests.Readings.Handlers
                 EndDate = new DateTime(2021, 1, 1)
             };
 
-            Assert.ThrowsAsync<Exception>(async () => await _sut.Handle(request, CancellationToken.None));
+            Assert.ThrowsAsync<InvalidDateRangeException>(async () => await _sut.Handle(request, CancellationToken.None));
         }
 
         [Test]

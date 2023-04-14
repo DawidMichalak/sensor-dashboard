@@ -1,5 +1,6 @@
 using sensor.Api;
 using sensor.Api.Messaging;
+using sensor.Api.Middleware;
 using sensor.Application.Readings.Commands;
 using sensor.Infrastructure.Configuration;
 
@@ -20,12 +21,15 @@ builder.Services.AddMessaging();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddCorsConfiguration(builder.Configuration, policyName);
 
+builder.Services.AddScoped<ErrorHandlingMiddleware>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
 app.UseCors(policyName);
+
+app.UseMiddleware<ErrorHandlingMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {

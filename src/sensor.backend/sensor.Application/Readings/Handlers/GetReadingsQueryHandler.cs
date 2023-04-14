@@ -2,6 +2,7 @@
 using sensor.Application.Contracts;
 using sensor.Application.Contracts.Persistence;
 using sensor.Application.Readings.Queries;
+using sensor.Domain.Exceptions;
 
 namespace sensor.Application.Readings.Handlers
 {
@@ -18,7 +19,7 @@ namespace sensor.Application.Readings.Handlers
         {
             if (request.BeginDate > request.EndDate)
             {
-                throw new Exception();
+                throw new InvalidDateRangeException();
             }
 
             return await _readingsRepository.GetAllReadingsAsync(request.BeginDate, request.EndDate);
