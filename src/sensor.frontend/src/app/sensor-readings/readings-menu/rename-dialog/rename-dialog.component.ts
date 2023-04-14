@@ -14,6 +14,6 @@ export class RenameDialogComponent {
   ) {}
 
   onCancelClick() {
-    this.dialogRef.close(this.data.name);
+    this.dialogRef.close(false);
   }
 }

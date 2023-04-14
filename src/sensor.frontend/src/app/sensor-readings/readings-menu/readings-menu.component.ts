@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { RenameDialogComponent } from './rename-dialog/rename-dialog.component';
 import { SensorDetailsService } from 'src/app/dashboard/sensor-details.service';
 import { SensorDetails } from 'src/app/dashboard/sensorDetails';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-readings-menu',
@@ -35,9 +36,24 @@ export class ReadingsMenuComponent implements OnInit {
       });
 
       dialogRef.afterClosed().subscribe((result) => {
-        this.sensorDetails[this.detailsIndex!].name = result;
-        this.detailsService.updateData(this.sensorDetails);
+        if (result) {
+          this.sensorDetails[this.detailsIndex!].name = result;
+          this.detailsService.updateData(this.sensorDetails);
+        }
       });
     }
+  }
+
+  openDeleteDialog(): void {
+    const dialogRef = this.dialog.open(DeleteDialogComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        const details = this.sensorDetails.filter(
+          (x) => x.id !== this.sensorId
+        );
+        this.detailsService.updateData(details);
+      }
+    });
   }
 }
