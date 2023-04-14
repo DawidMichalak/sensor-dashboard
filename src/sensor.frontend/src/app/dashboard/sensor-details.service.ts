@@ -23,6 +23,29 @@ export class SensorDetailsService {
     this.sensorDetails.next(newData);
   }
 
+  deleteSensorDetails(detailsId: number) {
+    const currentData = this.sensorDetails.value;
+    const newData = currentData.filter((details) => details.id !== detailsId);
+    this.sensorDetails.next(newData);
+    this.sendDeleteSensor(detailsId);
+  }
+
+  updateSensorDetails(newDetails: SensorDetails) {
+    const currentData = this.sensorDetails.value;
+    const detailsIndex = currentData.findIndex((x) => x.id === newDetails.id);
+    currentData[detailsIndex].name = newDetails.name;
+    this.sensorDetails.next(currentData);
+    this.sendUpdateSensor(newDetails);
+  }
+
+  private sendUpdateSensor(updatedDetails: SensorDetails) {
+    this.http.put(this.apiUrl, updatedDetails).subscribe();
+  }
+
+  private sendDeleteSensor(detailsId: number) {
+    this.http.delete(`${this.apiUrl}/${detailsId}`).subscribe();
+  }
+
   private getSensorDetails() {
     this.http.get<SensorDetails[]>(this.apiUrl).subscribe((data) => {
       this.updateData(data);

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using sensor.Application.Sensors.Commands;
 using sensor.Application.Sensors.Queries;
+using sensor.Domain.Models;
 
 namespace sensor.Api.Controllers
 {
@@ -38,9 +39,10 @@ namespace sensor.Api.Controllers
             return Ok();
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> DeleteSensor([FromBody] DeleteSensorCommand command)
+        [HttpDelete("{sensorId}")]
+        public async Task<IActionResult> DeleteSensor([FromRoute] int sensorId)
         {
+            var command = new DeleteSensorCommand() { Id = sensorId };
             await _mediator.Send(command);
             return Ok();
         }

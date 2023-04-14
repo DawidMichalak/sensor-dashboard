@@ -37,8 +37,10 @@ export class ReadingsMenuComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe((result) => {
         if (result) {
-          this.sensorDetails[this.detailsIndex!].name = result;
-          this.detailsService.updateData(this.sensorDetails);
+          this.detailsService.updateSensorDetails({
+            id: this.sensorId,
+            name: result,
+          });
         }
       });
     }
@@ -49,10 +51,7 @@ export class ReadingsMenuComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        const details = this.sensorDetails.filter(
-          (x) => x.id !== this.sensorId
-        );
-        this.detailsService.updateData(details);
+        this.detailsService.deleteSensorDetails(this.sensorId);
       }
     });
   }
