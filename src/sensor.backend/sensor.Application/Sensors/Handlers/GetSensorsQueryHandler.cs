@@ -5,7 +5,7 @@ using sensor.Domain.Models;
 
 namespace sensor.Application.Sensors.Handlers
 {
-    public class GetSensorsQueryHandler : IRequestHandler<GetSensorsQuery, IEnumerable<Sensor>>
+    internal sealed class GetSensorsQueryHandler : IRequestHandler<GetSensorsQuery, IEnumerable<Sensor>>
     {
         private readonly ISensorsRepository _repository;
 

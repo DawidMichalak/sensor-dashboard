@@ -5,7 +5,7 @@ using sensor.Domain.Models;
 
 namespace sensor.Application.Sensors.Handlers
 {
-    public class AddSensorCommandHandler : IRequestHandler<AddSensorCommand>
+    internal sealed class AddSensorCommandHandler : IRequestHandler<AddSensorCommand>
     {
         private readonly ISensorsRepository _repository;
 

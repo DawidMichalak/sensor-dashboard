@@ -7,7 +7,7 @@ using sensor.Application.Readings.Handlers;
 using sensor.Application.Readings.Queries;
 using sensor.Domain.Exceptions;
 
-namespace UnitTests.Readings.Handlers
+namespace UnitTests.Application.Handlers
 {
     public class GetReadingsQueryHandlerTests
     {

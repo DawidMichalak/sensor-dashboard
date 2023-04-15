@@ -4,7 +4,7 @@ using sensor.Application.Readings.Commands;
 
 namespace sensor.Application.Readings.Handlers
 {
-    public class AddReadingCommandHandler : IRequestHandler<AddReadingCommand>
+    internal sealed class AddReadingCommandHandler : IRequestHandler<AddReadingCommand>
     {
         private readonly IReadingsRepository _readingsRepository;
 

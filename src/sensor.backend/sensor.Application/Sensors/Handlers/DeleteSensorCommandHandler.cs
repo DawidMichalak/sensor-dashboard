@@ -4,7 +4,7 @@ using sensor.Application.Sensors.Commands;
 
 namespace sensor.Application.Sensors.Handlers
 {
-    public class DeleteSensorCommandHandler : IRequestHandler<DeleteSensorCommand>
+    internal sealed class DeleteSensorCommandHandler : IRequestHandler<DeleteSensorCommand>
     {
         private readonly ISensorsRepository _repository;
 
@@ -12,6 +12,7 @@ namespace sensor.Application.Sensors.Handlers
         {
             _repository = repository;
         }
+
         public Task Handle(DeleteSensorCommand request, CancellationToken cancellationToken)
         {
             return _repository.DeleteAsync(request.Id);

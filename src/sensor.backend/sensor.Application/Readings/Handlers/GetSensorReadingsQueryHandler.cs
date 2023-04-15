@@ -16,6 +16,7 @@ namespace sensor.Application.Readings.Handlers
         {
             _readingsRepository = readingsRepository;
             _cache = cache;
+            _cacheKey = string.Empty;
         }
 
         public async Task<ReadingsDto> Handle(GetSensorReadingsQuery request, CancellationToken cancellationToken)
@@ -49,7 +50,7 @@ namespace sensor.Application.Readings.Handlers
             {
                 return cachedCollection?.Where(r => r.SensorId == request.SensorId).FirstOrDefault();
             }
-            
+
             if (_cache.TryGetValue(_cacheKey, out ReadingsDto cachedResult))
             {
                 return cachedResult;
