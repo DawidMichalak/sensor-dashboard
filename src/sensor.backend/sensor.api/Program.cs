@@ -22,6 +22,7 @@ builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddCorsConfiguration(builder.Configuration, policyName);
 
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
+builder.Services.AddMemoryCache();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
