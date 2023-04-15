@@ -2,4 +2,5 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/src/sensor.backend/sensor.api/appsettings.Development.json
+/.vs
+/src/backend/SensorDashboard.Api/appsettings.Development.json
