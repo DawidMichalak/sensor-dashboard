@@ -25,7 +25,7 @@ namespace sensor.Api.Messaging.Processing
             var dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
             dateTime = dateTime.AddSeconds(unixTimeStamp).ToLocalTime();
 
-            var reading = new Reading { Metadata = new ReadingMetadata { SensorId = message.SensorId, Type = message.Type }, Timestamp = dateTime, Value = message.Value };
+            var reading = new Reading { Metadata = new ReadingMetadata(message.SensorId, message.Type), Timestamp = dateTime, Value = message.Value };
 
             await _mediator.Send(new AddReadingCommand { Reading = reading });
         }
