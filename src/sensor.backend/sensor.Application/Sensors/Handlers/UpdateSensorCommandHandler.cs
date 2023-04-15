@@ -13,9 +13,10 @@ namespace sensor.Application.Sensors.Handlers
         {
             _repository = repository;
         }
+
         public Task Handle(UpdateSensorCommand request, CancellationToken cancellationToken)
         {
-            var sensor = new Sensor { Id = request.Id, Name = request.Name };
+            var sensor = new Sensor(request.Id, request.Name);
             return _repository.UpdateAsync(sensor);
         }
     }

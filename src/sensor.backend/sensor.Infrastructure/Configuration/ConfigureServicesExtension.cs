@@ -29,6 +29,12 @@ namespace sensor.Infrastructure.Configuration
                 cm.MapIdMember(c => c.Id).SetSerializer(new StringSerializer(BsonType.ObjectId)).SetIdGenerator(StringObjectIdGenerator.Instance);
             });
 
+            BsonClassMap.RegisterClassMap<Sensor>(cm =>
+            {
+                cm.AutoMap();
+                cm.MapCreator(s => new Sensor(s.Id, s.Name));
+            });
+
             services.AddSingleton<MongoDbClient>();
             services.AddScoped<IReadingsRepository, ReadingsRepository>();
             services.AddScoped<ISensorsRepository, SensorsRepository>();

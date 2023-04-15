@@ -1,4 +1,5 @@
-﻿using Moq;
+﻿using Microsoft.Extensions.Caching.Memory;
+using Moq;
 using NUnit.Framework.Internal;
 using sensor.Application.Contracts;
 using sensor.Application.Contracts.Persistence;
@@ -16,8 +17,9 @@ namespace UnitTests.Readings.Handlers
         [SetUp]
         public void SetUp()
         {
+            var cache = new MemoryCache(new MemoryCacheOptions());
             _repositoryMock = new Mock<IReadingsRepository>();
-            _sut = new GetReadingsQueryHandler(_repositoryMock.Object);
+            _sut = new GetReadingsQueryHandler(_repositoryMock.Object, cache);
         }
 
         [Test]
