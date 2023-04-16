@@ -23,10 +23,10 @@ export class SensorReadingsComponent implements AfterViewInit {
     private cd: ChangeDetectorRef
   ) {}
 
-  @Input() public sensorData: any = {};
+  @Input() public sensorData: Readings | undefined;
   @Input() public sensorDetails!: SensorDetails;
 
-  public chart: Chart | undefined;
+  public chart!: Chart;
   private chartStartDate = DateTime.now().minus({ days: 2 });
 
   updateDateRange(newStartDate: DateTime) {
@@ -36,30 +36,31 @@ export class SensorReadingsComponent implements AfterViewInit {
         this.sensorData = data;
         this.chartStartDate = newStartDate;
 
-        this.chart!.data.labels = this.sensorData.timestamps;
-        this.chart!.data.datasets[0].data = this.sensorData.values;
-        this.chart!.options = this.lineChartOptions();
-        this.chart?.update();
+        if (this.sensorData) {
+          this.chart.data.labels = this.sensorData.timestamps;
+          this.chart.data.datasets[0].data = this.sensorData.values;
+        }
+        this.chart.options = this.lineChartOptions();
+        this.chart.update();
       });
   }
 
   ngAfterViewInit(): void {
-    if (this.sensorData) {
-      this.createChart();
-      this.cd.detectChanges();
-    }
+    this.createChart();
+    this.cd.detectChanges();
   }
 
   createChart() {
     this.chart = new Chart(`Chart${this.sensorDetails.id}`, {
       type: 'line',
       data: {
-        labels: this.sensorData.timestamps,
+        labels: this.sensorData?.timestamps,
         datasets: [
           {
             label: 'Temperature',
             borderColor: '#00609E',
-            data: this.sensorData.values,
+            data: this.sensorData?.values ?? [],
+            tension: 0.1
           },
         ],
       },
@@ -100,6 +101,11 @@ export class SensorReadingsComponent implements AfterViewInit {
         legend: {
           display: false,
         },
+      },
+      animations: {
+        x: {
+          duration: 0
+        }
       },
     };
   }
