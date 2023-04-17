@@ -15,3 +15,9 @@
   justify-content: space-between;
   padding: 0 1rem 0 1rem;
 }
+
+.date-selection {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
+}
