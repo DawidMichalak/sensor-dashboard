@@ -88,7 +88,7 @@ export class SensorReadingsComponent implements AfterViewInit {
             unit: 'hour',
             displayFormats: { hour: 'HH:mm' },
           },
-          min: this.chartStartDate.endOf('day').toString(),
+          min: this.chartStartDate.endOf('hour').toString(),
           max: DateTime.now().toString(),
         },
       },
