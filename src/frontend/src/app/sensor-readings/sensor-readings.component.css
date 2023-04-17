@@ -6,8 +6,10 @@
 .dashboard-card {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  height: 280px;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
 .card-header {
@@ -17,7 +19,7 @@
 }
 
 .date-selection {
-    flex-grow: 1;
-    display: flex;
-    justify-content: flex-end;
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
 }
