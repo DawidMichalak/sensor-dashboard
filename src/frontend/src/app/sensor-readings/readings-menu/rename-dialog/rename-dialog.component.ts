@@ -5,7 +5,7 @@ import { RenameDialogData } from './raname-dialog-data';
 @Component({
   selector: 'app-rename-dialog',
   templateUrl: './rename-dialog.component.html',
-  styleUrls: ['./rename-dialog.component.css'],
+  styleUrls: ['./rename-dialog.component.scss'],
 })
 export class RenameDialogComponent {
   constructor(

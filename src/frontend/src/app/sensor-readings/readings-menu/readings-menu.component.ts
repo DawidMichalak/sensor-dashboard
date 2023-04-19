@@ -8,7 +8,7 @@ import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 @Component({
   selector: 'app-readings-menu',
   templateUrl: './readings-menu.component.html',
-  styleUrls: ['./readings-menu.component.css'],
+  styleUrls: ['./readings-menu.component.scss'],
 })
 export class ReadingsMenuComponent implements OnInit {
   constructor(

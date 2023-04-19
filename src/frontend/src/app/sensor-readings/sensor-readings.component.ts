@@ -15,7 +15,7 @@ import { SensorDetails } from '../dashboard/sensorDetails';
 @Component({
   selector: 'app-sensor-readings',
   templateUrl: './sensor-readings.component.html',
-  styleUrls: ['./sensor-readings.component.css'],
+  styleUrls: ['./sensor-readings.component.scss'],
 })
 export class SensorReadingsComponent implements AfterViewInit {
   constructor(
