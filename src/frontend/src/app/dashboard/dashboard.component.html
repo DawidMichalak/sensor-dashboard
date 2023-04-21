@@ -2,7 +2,7 @@
   <app-sensor-readings
     *ngFor="let details of sensorDetails"
     [sensorDetails]="details"
-    [sensorData]="GetReadingsForSensor(details)"
+    [sensorData]="getReadingsForSensor(details)"
     class="sensor-reading"
   ></app-sensor-readings>
 </section>

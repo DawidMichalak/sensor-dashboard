@@ -9,7 +9,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import {
+  MAT_FORM_FIELD_DEFAULT_OPTIONS,
+  MatFormFieldModule,
+} from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -21,6 +24,8 @@ import { DeleteDialogComponent } from './sensor-readings/readings-menu/delete-di
 import { MatInputModule } from '@angular/material/input';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSelectModule } from '@angular/material/select';
+import { AddCardDialogComponent } from './add-card-dialog/add-card-dialog.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +37,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     RenameDialogComponent,
     DeleteDialogComponent,
     NavbarComponent,
+    AddCardDialogComponent,
   ],
   imports: [
     FormsModule,
@@ -47,9 +53,15 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatDialogModule,
     MatInputModule,
     MatToolbarModule,
+    MatSelectModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: 'outline' },
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

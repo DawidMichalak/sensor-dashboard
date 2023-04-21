@@ -1,11 +1,11 @@
 <h1 mat-dialog-title>Rename sensor</h1>
 <div mat-dialog-content>
-  <mat-form-field appearance="fill">
+  <mat-form-field class="outline-formfield">
     <mat-label>New name</mat-label>
     <input matInput [(ngModel)]="data.name" />
   </mat-form-field>
 </div>
-<div mat-dialog-actions>
+<div mat-dialog-actions [align]="'end'">
   <button mat-button (click)="onCancelClick()">Cancel</button>
   <button mat-button [mat-dialog-close]="data.name" cdkFocusInitial>Ok</button>
 </div>

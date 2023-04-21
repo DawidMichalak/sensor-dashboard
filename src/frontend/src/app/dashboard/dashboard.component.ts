@@ -29,7 +29,7 @@ export class DashboardComponent {
     });
   }
 
-  GetReadingsForSensor(details: SensorDetails) {
+  getReadingsForSensor(details: SensorDetails) {
     return this.readings.find((r) => r.sensorId === details.id);
   }
 }
