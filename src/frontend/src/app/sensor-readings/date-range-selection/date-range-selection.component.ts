@@ -6,7 +6,7 @@ import { DateTime } from 'luxon';
 @Component({
   selector: 'app-date-range-selection',
   templateUrl: './date-range-selection.component.html',
-  styleUrls: ['./date-range-selection.component.css'],
+  styleUrls: ['./date-range-selection.component.scss'],
 })
 export class DateRangeSelectionComponent {
   constructor(private timeService: TimeSelectionService) {}

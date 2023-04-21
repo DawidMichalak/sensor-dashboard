@@ -19,6 +19,8 @@ import { ReadingsMenuComponent } from './sensor-readings/readings-menu/readings-
 import { RenameDialogComponent } from './sensor-readings/readings-menu/rename-dialog/rename-dialog.component';
 import { DeleteDialogComponent } from './sensor-readings/readings-menu/delete-dialog/delete-dialog.component';
 import { MatInputModule } from '@angular/material/input';
+import { NavbarComponent } from './navbar/navbar.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import { MatInputModule } from '@angular/material/input';
     ReadingsMenuComponent,
     RenameDialogComponent,
     DeleteDialogComponent,
+    NavbarComponent,
   ],
   imports: [
     FormsModule,
@@ -43,6 +46,7 @@ import { MatInputModule } from '@angular/material/input';
     MatFormFieldModule,
     MatDialogModule,
     MatInputModule,
+    MatToolbarModule,
     HttpClientModule,
   ],
   providers: [],
