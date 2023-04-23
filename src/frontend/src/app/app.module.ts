@@ -26,6 +26,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSelectModule } from '@angular/material/select';
 import { AddCardDialogComponent } from './add-card-dialog/add-card-dialog.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { AddCardDialogComponent } from './add-card-dialog/add-card-dialog.compon
     AddCardDialogComponent,
   ],
   imports: [
+    ReactiveFormsModule,
     FormsModule,
     MatChipsModule,
     BrowserModule,
