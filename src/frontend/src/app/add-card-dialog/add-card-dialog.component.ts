@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { SensorDetailsService } from '../dashboard/sensor-details.service';
-import { SensorDetails } from '../dashboard/sensorDetails';
+import { SensorDetails } from '../shared/sensorDetails';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({

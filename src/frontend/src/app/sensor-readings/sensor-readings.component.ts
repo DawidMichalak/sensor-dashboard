@@ -9,8 +9,9 @@ import Chart from 'chart.js/auto';
 import 'chartjs-adapter-luxon';
 import { DateTime } from 'luxon';
 import { SensorDataService } from '../sensor-data.service';
-import { Readings } from './readings';
-import { SensorDetails } from '../dashboard/sensorDetails';
+import { Readings } from '../shared/readings';
+import { SensorDetails } from '../shared/sensorDetails';
+import { CardConfiguration } from '../shared/dashboardConfiguration';
 
 @Component({
   selector: 'app-sensor-readings',
@@ -24,14 +25,14 @@ export class SensorReadingsComponent implements AfterViewInit {
   ) {}
 
   @Input() public sensorData: Readings | undefined;
-  @Input() public sensorDetails!: SensorDetails;
+  @Input() public cardConfiguration!: CardConfiguration;
 
   public chart!: Chart;
   private chartStartDate = DateTime.now().minus({ days: 2 });
 
   updateDateRange(newStartDate: DateTime) {
     this.dataService
-      .getSelectedReadings(newStartDate, this.sensorDetails.id)
+      .getSelectedReadings(newStartDate, this.cardConfiguration.sensorId)
       .subscribe((data: Readings) => {
         this.sensorData = data;
         this.chartStartDate = newStartDate;
@@ -51,7 +52,7 @@ export class SensorReadingsComponent implements AfterViewInit {
   }
 
   createChart() {
-    this.chart = new Chart(`Chart${this.sensorDetails.id}`, {
+    this.chart = new Chart(`Chart${this.cardConfiguration.sensorId}`, {
       type: 'line',
       data: {
         labels: this.sensorData?.timestamps,
@@ -60,7 +61,7 @@ export class SensorReadingsComponent implements AfterViewInit {
             label: 'Temperature',
             borderColor: '#00609E',
             data: this.sensorData?.values ?? [],
-            tension: 0.1
+            tension: 0.1,
           },
         ],
       },
@@ -104,8 +105,8 @@ export class SensorReadingsComponent implements AfterViewInit {
       },
       animations: {
         x: {
-          duration: 0
-        }
+          duration: 0,
+        },
       },
     };
   }

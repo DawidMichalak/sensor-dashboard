@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { RenameDialogComponent } from './rename-dialog/rename-dialog.component';
 import { SensorDetailsService } from 'src/app/dashboard/sensor-details.service';
-import { SensorDetails } from 'src/app/dashboard/sensorDetails';
+import { SensorDetails } from 'src/app/shared/sensorDetails';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 
 @Component({

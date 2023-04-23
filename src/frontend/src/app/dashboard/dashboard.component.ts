@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { SensorDataService } from '../sensor-data.service';
-import { Readings } from '../sensor-readings/readings';
+import { Readings } from '../shared/readings';
 import { SensorDetailsService } from './sensor-details.service';
-import { SensorDetails } from './sensorDetails';
+import { SensorDetails } from '../shared/sensorDetails';
+import { DashboardConfigurationService } from '../dashboard-configuration.service';
+import { CardConfiguration } from '../shared/dashboardConfiguration';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,11 +14,13 @@ import { SensorDetails } from './sensorDetails';
 export class DashboardComponent {
   readings: Readings[] = [];
   sensorDetails: SensorDetails[] = [];
+  configurations: CardConfiguration[] = [];
   dataLoading: boolean = true;
 
   constructor(
     private dataService: SensorDataService,
-    private detailsService: SensorDetailsService
+    private detailsService: SensorDetailsService,
+    private configurationService: DashboardConfigurationService
   ) {}
 
   ngOnInit(): void {
@@ -27,9 +31,12 @@ export class DashboardComponent {
     this.detailsService.getData().subscribe((data) => {
       this.sensorDetails = data;
     });
+    this.configurationService.getConfiguration().subscribe((data) => {
+      this.configurations = data;
+    });
   }
 
-  getReadingsForSensor(details: SensorDetails) {
-    return this.readings.find((r) => r.sensorId === details.id);
+  getReadingsForSensor(id: number) {
+    return this.readings.find((r) => r.sensorId === id);
   }
 }
