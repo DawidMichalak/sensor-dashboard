@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using SensorDashboard.Application.Sensors.Commands;
 using SensorDashboard.Application.Sensors.Queries;
-using SensorDashboard.Domain.Models;
 
 namespace SensorDashboard.Api.Controllers
 {
@@ -32,7 +31,7 @@ namespace SensorDashboard.Api.Controllers
             return Ok();
         }
 
-        [HttpPut]
+        [HttpPatch]
         public async Task<IActionResult> UpdateSensor([FromBody] UpdateSensorCommand command)
         {
             await _mediator.Send(command);
