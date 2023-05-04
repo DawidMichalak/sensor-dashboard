@@ -5,7 +5,7 @@
       (newStartDateEvent)="updateDateRange($event)"
       class="date-selection"
     />
-    <app-readings-menu [sensorId]="cardConfiguration.sensorId" />
+    <app-readings-menu [cardConfiguration]="cardConfiguration" />
   </div>
   <div class="chart-container">
     <canvas id="Chart{{ cardConfiguration.id }}" role="img">{{ chart }}</canvas>

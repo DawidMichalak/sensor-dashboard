@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
   CardConfiguration,
@@ -23,6 +23,26 @@ export class DashboardConfigurationService {
 
   updateConfiguration(newData: CardConfiguration[]) {
     this.configuration.next(newData);
+  }
+
+  updateConfigurationItem(newData: CardConfiguration) {
+    const currentData = this.configuration.value;
+    currentData[currentData.findIndex((x) => x.id == newData.id)] = newData;
+
+    const params = {
+      params: new HttpParams()
+        .set('Name', newData.name)
+        .set('SensorId', newData.sensorId),
+    };
+
+    this.http
+      .patch(
+        `${this.apiUrl}/${this.configurationId}/item/${newData.id}`,
+        undefined,
+        params
+      )
+      .subscribe();
+    this.configuration.next(currentData);
   }
 
   removeConfigurationItem(itemId: string) {

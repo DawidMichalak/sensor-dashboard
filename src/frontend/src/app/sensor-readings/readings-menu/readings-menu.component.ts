@@ -2,8 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { RenameDialogComponent } from './rename-dialog/rename-dialog.component';
 import { SensorDetailsService } from 'src/app/dashboard/sensor-details.service';
-import { SensorDetails } from 'src/app/shared/sensorDetails';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
+import { CardConfiguration } from 'src/app/shared/dashboardConfiguration';
+import { DashboardConfigurationService } from 'src/app/dashboard-configuration.service';
 
 @Component({
   selector: 'app-readings-menu',
@@ -13,34 +14,24 @@ import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 export class ReadingsMenuComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
-    private detailsService: SensorDetailsService
+    private configurationService: DashboardConfigurationService
   ) {}
-  @Input() public sensorId!: number;
+  @Input() public cardConfiguration!: CardConfiguration;
 
-  private sensorDetails!: SensorDetails[];
-  private detailsIndex: number | undefined;
-
-  ngOnInit(): void {
-    this.detailsService.getData().subscribe((data) => {
-      this.sensorDetails = data;
-      this.detailsIndex = this.sensorDetails.findIndex(
-        (x) => x.id === this.sensorId
-      );
-    });
-  }
+  ngOnInit(): void {}
 
   openRenameDialog(): void {
-    if (this.detailsIndex !== undefined) {
+    if (this.cardConfiguration !== undefined) {
       const dialogRef = this.dialog.open(RenameDialogComponent, {
-        data: { name: this.sensorDetails[this.detailsIndex].name },
+        data: { name: this.cardConfiguration.name },
       });
 
       dialogRef.afterClosed().subscribe((result) => {
         if (result) {
-          this.detailsService.updateSensorDetails({
-            id: this.sensorId,
-            name: result,
-          });
+          this.cardConfiguration.name = result;
+          this.configurationService.updateConfigurationItem(
+            this.cardConfiguration
+          );
         }
       });
     }
@@ -51,7 +42,9 @@ export class ReadingsMenuComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.detailsService.deleteSensorDetails(this.sensorId);
+        this.configurationService.removeConfigurationItem(
+          this.cardConfiguration.id
+        );
       }
     });
   }
