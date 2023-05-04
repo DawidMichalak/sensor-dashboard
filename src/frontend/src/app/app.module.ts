@@ -25,7 +25,7 @@ import { MatInputModule } from '@angular/material/input';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSelectModule } from '@angular/material/select';
-import { AddCardDialogComponent } from './add-card-dialog/add-card-dialog.component';
+import { AddCardDialogComponent } from './navbar/add-card-dialog/add-card-dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({

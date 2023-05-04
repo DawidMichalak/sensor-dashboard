@@ -8,8 +8,6 @@
     <app-readings-menu [sensorId]="cardConfiguration.sensorId" />
   </div>
   <div class="chart-container">
-    <canvas id="Chart{{ cardConfiguration.sensorId }}" role="img">{{
-      chart
-    }}</canvas>
+    <canvas id="Chart{{ cardConfiguration.id }}" role="img">{{ chart }}</canvas>
   </div>
 </div>

@@ -10,7 +10,8 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class DashboardConfigurationService {
-  private apiUrl = 'https://localhost:7288/configuration';
+  private apiUrl = 'https://localhost:7288/configurations';
+  private configurationId = '6448e7271840ac33b58cbb9e'; //for now use this configuration
   constructor(private http: HttpClient) {
     this.getDashboardConfigutation();
   }
@@ -24,9 +25,31 @@ export class DashboardConfigurationService {
     this.configuration.next(newData);
   }
 
+  removeConfigurationItem(itemId: string) {
+    this.http
+      .delete(`${this.apiUrl}/${this.configurationId}/item/${itemId}`)
+      .subscribe(() => {
+        const currentData = this.configuration.value;
+        const newData = currentData.filter((item) => item.id !== itemId);
+        this.updateConfiguration(newData);
+      });
+  }
+
+  addConfigurationItem(item: Partial<CardConfiguration>) {
+    this.http
+      .post<CardConfiguration>(`${this.apiUrl}/${this.configurationId}`, item)
+      .subscribe((data) => {
+        const currentData = this.configuration.value;
+        currentData.push(data);
+        this.updateConfiguration(currentData);
+      });
+  }
+
   private getDashboardConfigutation() {
-    this.http.get<DashboardConfiguration>(this.apiUrl).subscribe((data) => {
-      this.updateConfiguration(data.configurationItems);
-    });
+    this.http
+      .get<DashboardConfiguration>(`${this.apiUrl}/${this.configurationId}`)
+      .subscribe((data) => {
+        this.updateConfiguration(data.configurationItems);
+      });
   }
 }

@@ -7,7 +7,7 @@
     </mat-form-field>
     <mat-form-field>
       <mat-label>Select sensor</mat-label>
-      <mat-select formControlName="sensor" required>
+      <mat-select formControlName="sensorId" required>
         <mat-option
           *ngFor="let details of sensorDetails"
           value="{{ details.id }}"

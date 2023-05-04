@@ -52,7 +52,7 @@ export class SensorReadingsComponent implements AfterViewInit {
   }
 
   createChart() {
-    this.chart = new Chart(`Chart${this.cardConfiguration.sensorId}`, {
+    this.chart = new Chart(`Chart${this.cardConfiguration.id}`, {
       type: 'line',
       data: {
         labels: this.sensorData?.timestamps,

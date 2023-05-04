@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { SensorDetailsService } from '../dashboard/sensor-details.service';
-import { SensorDetails } from '../shared/sensorDetails';
+import { SensorDetailsService } from '../../dashboard/sensor-details.service';
+import { SensorDetails } from '../../shared/sensorDetails';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { CardConfiguration } from 'src/app/shared/dashboardConfiguration';
+import { DashboardConfigurationService } from 'src/app/dashboard-configuration.service';
 
 @Component({
   selector: 'app-add-card-dialog',
@@ -12,14 +14,15 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class AddCardDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<AddCardDialogComponent>,
-    private detailsService: SensorDetailsService
+    private detailsService: SensorDetailsService,
+    private configurationService: DashboardConfigurationService
   ) {}
 
   sensorDetails: SensorDetails[] = [];
 
   createForm = new FormGroup({
     name: new FormControl(''),
-    sensor: new FormControl('', Validators.required),
+    sensorId: new FormControl(0, Validators.required),
   });
 
   ngOnInit(): void {
@@ -33,6 +36,14 @@ export class AddCardDialogComponent {
       return;
     }
     console.log(this.createForm.value);
-    this.dialogRef.close();
+
+    const createdConfiguration: Partial<CardConfiguration> = {
+      name: this.createForm.value.name ?? '',
+      sensorId: this.createForm.value.sensorId ?? 0,
+    };
+
+    this.configurationService.addConfigurationItem(createdConfiguration);
+
+    this.dialogRef.close(createdConfiguration);
   }
 }

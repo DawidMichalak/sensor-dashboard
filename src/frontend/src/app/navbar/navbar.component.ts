@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { AddCardDialogComponent } from '../add-card-dialog/add-card-dialog.component';
+import { AddCardDialogComponent } from './add-card-dialog/add-card-dialog.component';
 
 @Component({
   selector: 'app-navbar',
@@ -11,10 +11,5 @@ export class NavbarComponent {
   constructor(private dialog: MatDialog) {}
   openCreateDialog(): void {
     const dialogRef = this.dialog.open(AddCardDialogComponent);
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-      }
-    });
   }
 }
