@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>Create dashboard card</h1>
+<div mat-dialog-content>
+  <form [formGroup]="createForm" (ngSubmit)="onSubmit()" id="create-form">
+    <mat-form-field class="outline-formfield">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" required />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Select sensor</mat-label>
+      <mat-select formControlName="sensorId" required>
+        <mat-option
+          *ngFor="let details of sensorDetails"
+          value="{{ details.id }}"
+          >{{ details.name }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions [align]="'end'">
+  <button mat-button [mat-dialog-close] cdkFocusInitial>Cancel</button>
+  <button mat-button form="create-form">Create</button>
+</div>

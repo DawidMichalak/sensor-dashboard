@@ -16,6 +16,15 @@ namespace SensorDashboard.Infrastructure.Configuration
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddAutoMapper(typeof(ConfigureServicesExtension).Assembly);
+
+            AddMongoDb(services, configuration);
+
+            return services;
+        }
+
+        private static void AddMongoDb(IServiceCollection services, IConfiguration configuration)
+        {
             var pack = new ConventionPack
             {
                 new CamelCaseElementNameConvention()
@@ -38,8 +47,7 @@ namespace SensorDashboard.Infrastructure.Configuration
             services.AddSingleton<MongoDbClient>();
             services.AddScoped<IReadingsRepository, ReadingsRepository>();
             services.AddScoped<ISensorsRepository, SensorsRepository>();
-
-            return services;
+            services.AddScoped<IConfigurationsRepository, ConfigurationsRepository>();
         }
     }
 }
