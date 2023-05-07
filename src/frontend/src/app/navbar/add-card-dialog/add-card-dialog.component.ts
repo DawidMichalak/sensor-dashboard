@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { SensorDetailsService } from '../../dashboard/sensor-details.service';
-import { SensorDetails } from '../../shared/sensorDetails';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { CardConfiguration } from 'src/app/shared/dashboardConfiguration';
-import { DashboardConfigurationService } from 'src/app/dashboard-configuration.service';
+import { CardConfiguration } from 'src/app/core/models/dashboardConfiguration';
+import { DashboardConfigurationService } from 'src/app/core/api/dashboard-configuration.service';
+import { SensorDetailsService } from 'src/app/core/api/sensor-details.service';
+import { SensorDetails } from 'src/app/core/models/sensorDetails';
 
 @Component({
   selector: 'app-add-card-dialog',

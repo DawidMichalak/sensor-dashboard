@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { SensorDataService } from '../sensor-data.service';
-import { Readings } from '../shared/readings';
-import { SensorDetailsService } from './sensor-details.service';
-import { SensorDetails } from '../shared/sensorDetails';
-import { DashboardConfigurationService } from '../dashboard-configuration.service';
-import { CardConfiguration } from '../shared/dashboardConfiguration';
+import { SensorDataService } from '../core/api/sensor-data.service';
+import { DashboardConfigurationService } from '../core/api/dashboard-configuration.service';
+import { CardConfiguration } from '../core/models/dashboardConfiguration';
+import { Readings } from '../core/models/readings';
+import { SensorDetails } from '../core/models/sensorDetails';
+import { SensorDetailsService } from '../core/api/sensor-details.service';
 
 @Component({
   selector: 'app-dashboard',

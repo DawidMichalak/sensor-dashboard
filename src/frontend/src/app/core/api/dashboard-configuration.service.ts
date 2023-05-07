@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import {
   CardConfiguration,
   DashboardConfiguration,
-} from './shared/dashboardConfiguration';
+} from '../models/dashboardConfiguration';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({

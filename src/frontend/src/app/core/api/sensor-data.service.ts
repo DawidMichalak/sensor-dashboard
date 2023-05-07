@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { HttpParams } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { Readings } from './shared/readings';
+import { Observable } from 'rxjs';
 import { DateTime } from 'luxon';
+import { Readings } from '../models/readings';
 
 @Injectable({
   providedIn: 'root',

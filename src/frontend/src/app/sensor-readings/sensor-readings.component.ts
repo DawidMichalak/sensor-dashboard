@@ -8,10 +8,10 @@ import { ChartOptions } from 'chart.js';
 import Chart from 'chart.js/auto';
 import 'chartjs-adapter-luxon';
 import { DateTime } from 'luxon';
-import { SensorDataService } from '../sensor-data.service';
+import { SensorDataService } from '../core/api/sensor-data.service';
 import { Readings } from '../shared/readings';
 import { SensorDetails } from '../shared/sensorDetails';
-import { CardConfiguration } from '../shared/dashboardConfiguration';
+import { CardConfiguration } from '../core/models/dashboardConfiguration';
 
 @Component({
   selector: 'app-sensor-readings',
