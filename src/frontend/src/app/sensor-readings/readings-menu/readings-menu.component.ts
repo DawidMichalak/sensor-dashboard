@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { RenameDialogComponent } from './rename-dialog/rename-dialog.component';
-import { SensorDetailsService } from 'src/app/dashboard/sensor-details.service';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { CardConfiguration } from 'src/app/core/models/dashboardConfiguration';
 import { DashboardConfigurationService } from 'src/app/core/api/dashboard-configuration.service';
