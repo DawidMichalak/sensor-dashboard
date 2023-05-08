@@ -1,0 +1,23 @@
+name: .NET
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 7.0.x
+    - name: Restore dependencies
+      run: dotnet restore ./src/backend/SensorDashboard.sln
+    - name: Build
+      run: dotnet build ./src/backend/SensorDashboard.sln --no-restore
+    - name: Test
+      run: dotnet test ./src/backend/SensorDashboard.UnitTests/SensorDashboard.UnitTests.csproj --no-build --verbosity normal
