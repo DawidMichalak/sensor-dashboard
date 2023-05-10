@@ -8,7 +8,7 @@ import { SensorReadingsComponent } from './sensor-readings/sensor-readings.compo
 import { DateRangeSelectionComponent } from './sensor-readings/date-range-selection/date-range-selection.component';
 import { ReadingsMenuComponent } from './sensor-readings/readings-menu/readings-menu.component';
 import { RenameDialogComponent } from './sensor-readings/readings-menu/rename-dialog/rename-dialog.component';
-import { DeleteDialogComponent } from './sensor-readings/readings-menu/delete-dialog/delete-dialog.component';
+import { DeleteDialogComponent } from './shared/delete-dialog/delete-dialog.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AddCardDialogComponent } from './dashboard/add-card-dialog/add-card-dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';

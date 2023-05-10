@@ -35,7 +35,6 @@ export class AddCardDialogComponent {
     if (this.createForm.invalid) {
       return;
     }
-    console.log(this.createForm.value);
 
     const createdConfiguration: Partial<CardConfiguration> = {
       name: this.createForm.value.name ?? '',
