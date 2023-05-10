@@ -5,7 +5,7 @@ import { CardConfiguration } from '../core/models/dashboardConfiguration';
 import { Readings } from '../core/models/readings';
 import { SensorDetails } from '../core/models/sensorDetails';
 import { SensorDetailsService } from '../core/api/sensor-details.service';
-import { AddCardDialogComponent } from '../navbar/add-card-dialog/add-card-dialog.component';
+import { AddCardDialogComponent } from './add-card-dialog/add-card-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({

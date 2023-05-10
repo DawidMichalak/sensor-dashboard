@@ -10,7 +10,7 @@ import { ReadingsMenuComponent } from './sensor-readings/readings-menu/readings-
 import { RenameDialogComponent } from './sensor-readings/readings-menu/rename-dialog/rename-dialog.component';
 import { DeleteDialogComponent } from './sensor-readings/readings-menu/delete-dialog/delete-dialog.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { AddCardDialogComponent } from './navbar/add-card-dialog/add-card-dialog.component';
+import { AddCardDialogComponent } from './dashboard/add-card-dialog/add-card-dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
