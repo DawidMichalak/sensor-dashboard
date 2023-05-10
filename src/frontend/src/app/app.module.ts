@@ -13,6 +13,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AddCardDialogComponent } from './navbar/add-card-dialog/add-card-dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
+import { AppRoutingModule } from './app-routing.module';
+import { SensorsListComponent } from './sensors-list/sensors-list.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { SharedModule } from './shared/shared.module';
     DeleteDialogComponent,
     NavbarComponent,
     AddCardDialogComponent,
+    SensorsListComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -32,6 +35,7 @@ import { SharedModule } from './shared/shared.module';
     BrowserModule,
     HttpClientModule,
     SharedModule,
+    AppRoutingModule,
   ],
 
   bootstrap: [AppComponent],

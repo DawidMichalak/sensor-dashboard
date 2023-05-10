@@ -5,6 +5,8 @@ import { CardConfiguration } from '../core/models/dashboardConfiguration';
 import { Readings } from '../core/models/readings';
 import { SensorDetails } from '../core/models/sensorDetails';
 import { SensorDetailsService } from '../core/api/sensor-details.service';
+import { AddCardDialogComponent } from '../navbar/add-card-dialog/add-card-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,7 +22,8 @@ export class DashboardComponent {
   constructor(
     private dataService: SensorDataService,
     private detailsService: SensorDetailsService,
-    private configurationService: DashboardConfigurationService
+    private configurationService: DashboardConfigurationService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -34,6 +37,10 @@ export class DashboardComponent {
     this.configurationService.getConfiguration().subscribe((data) => {
       this.configurations = data;
     });
+  }
+
+  openCreateDialog(): void {
+    this.dialog.open(AddCardDialogComponent);
   }
 
   getReadingsForSensor(id: number) {

@@ -1,3 +1,8 @@
+<button mat-button (click)="openCreateDialog()">
+  <mat-icon>edit</mat-icon>
+  <span>Add Card</span>
+</button>
+
 <section class="grid-container" *ngIf="dataLoading === false">
   <app-sensor-readings
     *ngFor="let configuration of configurations"
