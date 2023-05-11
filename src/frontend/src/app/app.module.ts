@@ -9,14 +9,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    SharedModule,
-    AppRoutingModule,
-    SensorsModule,
-    DashboardModule,
-  ],
+  imports: [BrowserModule, HttpClientModule, SharedModule, AppRoutingModule],
 
   bootstrap: [AppComponent],
 })

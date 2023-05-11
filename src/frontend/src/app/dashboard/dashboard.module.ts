@@ -8,6 +8,14 @@ import { AddCardDialogComponent } from './add-card-dialog/add-card-dialog.compon
 import { DashboardComponent } from './dashboard.component';
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: DashboardComponent,
+  },
+];
 
 @NgModule({
   declarations: [
@@ -18,6 +26,12 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     RenameDialogComponent,
     AddCardDialogComponent,
   ],
-  imports: [CommonModule, SharedModule, ReactiveFormsModule, FormsModule],
+  imports: [
+    CommonModule,
+    SharedModule,
+    ReactiveFormsModule,
+    FormsModule,
+    RouterModule.forChild(routes),
+  ],
 })
 export class DashboardModule {}
