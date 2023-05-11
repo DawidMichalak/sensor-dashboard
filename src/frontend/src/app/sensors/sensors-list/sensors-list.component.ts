@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { SensorDetailsService } from '../core/api/sensor-details.service';
-import { SensorDetails } from '../core/models/sensorDetails';
+import { SensorDetailsService } from '../../core/api/sensor-details.service';
+import { SensorDetails } from '../../core/models/sensorDetails';
 import { MatTableDataSource } from '@angular/material/table';
-import { DeleteDialogComponent } from '../shared/delete-dialog/delete-dialog.component';
+import { DeleteDialogComponent } from '../../shared/delete-dialog/delete-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 
 export interface PeriodicElement {

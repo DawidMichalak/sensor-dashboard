@@ -16,9 +16,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { AppRoutingModule } from '../app-routing.module';
 
 @NgModule({
-  declarations: [],
+  declarations: [DeleteDialogComponent, NavbarComponent],
   imports: [
     CommonModule,
     MatChipsModule,
@@ -34,6 +37,7 @@ import { MatTableModule } from '@angular/material/table';
     MatSelectModule,
     BrowserAnimationsModule,
     MatTableModule,
+    AppRoutingModule,
   ],
   exports: [
     MatChipsModule,
@@ -48,6 +52,8 @@ import { MatTableModule } from '@angular/material/table';
     MatToolbarModule,
     MatSelectModule,
     MatTableModule,
+    DeleteDialogComponent,
+    NavbarComponent,
   ],
   providers: [
     {
