@@ -14,10 +14,13 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTableModule } from '@angular/material/table';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [],
+  declarations: [DeleteDialogComponent, NavbarComponent],
   imports: [
     CommonModule,
     MatChipsModule,
@@ -31,7 +34,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatInputModule,
     MatToolbarModule,
     MatSelectModule,
-    BrowserAnimationsModule,
+    MatTableModule,
+    RouterModule,
   ],
   exports: [
     MatChipsModule,
@@ -45,6 +49,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatInputModule,
     MatToolbarModule,
     MatSelectModule,
+    MatTableModule,
+    DeleteDialogComponent,
+    NavbarComponent,
   ],
   providers: [
     {

@@ -38,8 +38,15 @@ export class SensorDetailsService {
     this.sendUpdateSensor(newDetails);
   }
 
+  addSensor(details: SensorDetails) {
+    this.http.post(this.apiUrl, details).subscribe();
+    const data = this.sensorDetails.value;
+    data.push(details);
+    this.updateData(data);
+  }
+
   private sendUpdateSensor(updatedDetails: SensorDetails) {
-    this.http.put(this.apiUrl, updatedDetails).subscribe();
+    this.http.patch(this.apiUrl, updatedDetails).subscribe();
   }
 
   private sendDeleteSensor(detailsId: number) {
