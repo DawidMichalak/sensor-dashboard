@@ -4,6 +4,7 @@ import { SensorDetails } from '../../core/models/sensorDetails';
 import { MatTableDataSource } from '@angular/material/table';
 import { DeleteDialogComponent } from '../../shared/delete-dialog/delete-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { EditSensorComponent } from './edit-sensor/edit-sensor.component';
 
 export interface PeriodicElement {
   name: string;
@@ -39,6 +40,19 @@ export class SensorsListComponent {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.detailsService.deleteSensorDetails(id);
+      }
+    });
+  }
+
+  openEditDialog(sensor: SensorDetails): void {
+    const dialogRef = this.dialog.open(EditSensorComponent, {
+      data: sensor,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        console.log(result);
+        this.detailsService.updateSensorDetails(result);
       }
     });
   }
