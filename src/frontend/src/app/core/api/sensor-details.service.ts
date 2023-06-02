@@ -39,7 +39,7 @@ export class SensorDetailsService {
   }
 
   private sendUpdateSensor(updatedDetails: SensorDetails) {
-    this.http.put(this.apiUrl, updatedDetails).subscribe();
+    this.http.patch(this.apiUrl, updatedDetails).subscribe();
   }
 
   private sendDeleteSensor(detailsId: number) {
