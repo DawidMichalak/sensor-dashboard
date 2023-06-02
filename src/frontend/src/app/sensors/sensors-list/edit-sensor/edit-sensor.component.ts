@@ -11,12 +11,12 @@ import { SensorDetails } from 'src/app/core/models/sensorDetails';
 export class EditSensorComponent {
   constructor(
     public dialogRef: MatDialogRef<EditSensorComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: SensorDetails
+    @Inject(MAT_DIALOG_DATA) public data?: SensorDetails
   ) {}
 
   sensorForm = new FormGroup({
-    sensorId: new FormControl(this.data.id, Validators.required),
-    name: new FormControl(this.data.name, Validators.required),
+    sensorId: new FormControl(this.data?.id, Validators.required),
+    name: new FormControl(this.data?.name, Validators.required),
   });
 
   onSubmit(): void {

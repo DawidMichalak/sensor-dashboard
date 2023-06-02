@@ -18,7 +18,7 @@ export interface PeriodicElement {
   templateUrl: './sensors-list.component.html',
   styleUrls: ['./sensors-list.component.scss'],
 })
-export class SensorsListComponent {
+export class SensorsListComponent implements OnInit {
   constructor(
     private detailsService: SensorDetailsService,
     public dialog: MatDialog
@@ -44,15 +44,18 @@ export class SensorsListComponent {
     });
   }
 
-  openEditDialog(sensor: SensorDetails): void {
+  openEditDialog(sensor?: SensorDetails): void {
     const dialogRef = this.dialog.open(EditSensorComponent, {
       data: sensor,
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        console.log(result);
-        this.detailsService.updateSensorDetails(result);
+        if (sensor === undefined) {
+          this.detailsService.addSensor(result);
+        } else {
+          this.detailsService.updateSensorDetails(result);
+        }
       }
     });
   }
